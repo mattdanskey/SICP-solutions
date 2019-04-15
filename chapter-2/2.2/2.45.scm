@@ -5,6 +5,17 @@
 (define (p f n)
   (paint (f einstein n)))
 
+(define (split f g)
+  (lambda (painter n)
+    (if (= n 0)
+        painter
+        (let ((smaller ((split f g) painter (- n 1))))
+          (f painter (g smaller smaller))))))
+      
+
+(define right-split (split beside below))
+(define up-split (split below beside))
+
 (define (right-split-old painter n)
   (if (= n 0)
       painter
