@@ -1,0 +1,25 @@
+/* for a light-on-dark colorscheme */
+
+body,
+figcaption,
+#footnote_popup
+{
+    background-color: #363636;
+    color: #eee;
+}
+
+figure
+{
+    color: #363636;
+    background-color: #eee;
+}
+
+
+.secnum,
+a[href] {
+    color: #fba94e;
+}
+
+.pln {
+    color: #bebebe;
+}
