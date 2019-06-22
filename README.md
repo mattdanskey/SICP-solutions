@@ -22,3 +22,4 @@ The version of the book I've been using most is [this HTML5 rendition](https://g
 * While you may be able to display the images in another editor in some way, I used DrRacket for this section.
 * Run `(paint einstein)` and if you see a picture of Einstein, you're good to go!
 * When combining painters, the `sicp-pict` implementation doesn't respect aspect ratio of the images, so expect to see some squished/stretched images with procedures such as `right-split`. I thought my `corner-split` wasn't right because of this since the corner looked off, but it was correct.
+* `sicp-pict` doesn't work for exercise 2.49, so you will have to look up a way around it. I used a solution that utilized the lib `racket/draw` and saved pictures to the filesystem, based heavily on [this solution](https://github.com/slobodin/SICP/blob/master/ch2/ex2-49.scm).
