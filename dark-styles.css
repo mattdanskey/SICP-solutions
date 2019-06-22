@@ -1,15 +1,12 @@
 /* for a light-on-dark colorscheme */
-
 body,
 figcaption,
-#footnote_popup
-{
+#footnote_popup {
     background-color: #363636;
     color: #eee;
 }
 
-figure
-{
+figure {
     color: #363636;
     background-color: #eee;
 }
@@ -22,4 +19,8 @@ a[href] {
 
 .pln {
     color: #bebebe;
+}
+
+nav.header p {
+    background-color: #2c2c2c;
 }
