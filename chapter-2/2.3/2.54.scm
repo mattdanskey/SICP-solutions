@@ -4,13 +4,11 @@
   (cond ((not (and (pair? list1) (pair? list2)))
 	 (eq? list1 list2))
 	((and (pair? (car list1)) (pair? (car list2)))
-	 (if (equal? (car list1) (car list2))
-	     (equal? (cdr list1) (cdr list2))
-	     #f))
+	 (and (equal? (car list1) (car list2))
+	      (equal? (cdr list1) (cdr list2))))
 	(else
-	  (if (eq? (car list1) (car list2))
-	      (equal? (cdr list1) (cdr list2))
-	      #f))))
+	  (and (eq? (car list1) (car list2))
+	       (equal? (cdr list1) (cdr list2))))))
 
 
 (eq? #t
