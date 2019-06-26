@@ -79,3 +79,10 @@
 				(make-sum (exponent exp) -1))))
 	(else (error "unknown expression 
 		     type: DERIV" exp))))
+
+(equal? (deriv '(** x 1) 'x)
+     	1)
+(equal? (deriv '(** x 2) 'x)
+	'(* 2 x))
+(equal? (deriv '(** x 3) 'x)
+	'(* 3 (** x 2)))
