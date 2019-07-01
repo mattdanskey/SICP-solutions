@@ -22,7 +22,10 @@
 
 (define (multiplier p) (cadr p))
 
-(define (multiplicand p) (caddr p))
+(define (multiplicand p)
+  (if (eq? (cdddr p) '())
+      (caddr p)
+      (cons '* (cddr p))))
 
 (define (=number? exp num)
   (and (number? exp) (= exp num)))
@@ -85,7 +88,7 @@
 
 (define (test result expected)
   (if (not (equal? result expected))
-      (error "expected " expected " got " result)))
+      (error "expected " expected "got" result)))
 
 ;;tests!
 ;sums
@@ -112,10 +115,10 @@
 (test (deriv '(* (* x 3) y) 'x)
 	'(* 3 y))
 ;3+ terms
-;(test (deriv '(* x 2 3))
-;      6)
-;(test (deriv '(* 2 3 x))
-;      6)
+(test (deriv '(* x 2 3) 'x)
+      6)
+(test (deriv '(* 2 3 x) 'x)
+      6)
 
 ;exponentiation
 (test (deriv '(** x 1) 'x)
