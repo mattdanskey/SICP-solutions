@@ -116,9 +116,11 @@
 	'(* 3 y))
 ;3+ terms
 (test (deriv '(* x 2 3) 'x)
-      6)
+      '(* 2 3))
 (test (deriv '(* 2 3 x) 'x)
       6)
+(test (deriv '(* 2 3 4 x y) 'x)
+      '(* 2 (* 3 (* 4 y))))
 
 ;exponentiation
 (test (deriv '(** x 1) 'x)
