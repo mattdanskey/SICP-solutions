@@ -47,7 +47,6 @@
 	(else (cons (car set)
 		    (adjoin-set x (cdr set))))))
 
-
 (define (make-leaf-set pairs)
   (if (null? pairs)
       '()
@@ -57,24 +56,6 @@
 		    ; symbol
 		    ; frequency
 		    (make-leaf-set (cdr pairs))))))
-
-; sample tree and message to be decoded:
-(define sample-tree
-  (make-code-tree (make-leaf 'A 4)
-		  (make-code-tree
-		    (make-leaf 'B 2)
-		    (make-code-tree
-		      (make-leaf 'D 1)
-		      (make-leaf 'C 1)))))
-(define sample-message '(0 1 1 0 0 1 0 1 0 1 1 1 0))
-
-(display (decode sample-message sample-tree))
-; ADABBCA
-
-(define (element-of-set? x set)
-  (cond ((null? set) false)
-	((equal? x (car set)) true)
-	(else (element-of-set? x (cdr set)))))
 
 (define (encode message tree)
   (if (null? message)
@@ -95,6 +76,24 @@
 	   (if (leaf? right)
 	       (list 1)
 	       (cons 1 (encode-symbol symbol right))))
-	  (else (error)))))
+	  (else (error "bad symbol: ENCODE-SYMBOL" symbol)))))
+
+(define (element-of-set? x set)
+  (cond ((null? set) false)
+	((equal? x (car set)) true)
+	(else (element-of-set? x (cdr set)))))
 
 (define unencoded-message '(A D A B B C A))
+
+(define sample-tree
+  (make-code-tree (make-leaf 'A 4)
+		  (make-code-tree
+		    (make-leaf 'B 2)
+		    (make-code-tree
+		      (make-leaf 'D 1)
+		      (make-leaf 'C 1)))))
+
+(define sample-message '(0 1 1 0 0 1 0 1 0 1 1 1 0))
+
+(equal? (encode unencoded-message sample-tree)
+	sample-message)
