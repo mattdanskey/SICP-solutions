@@ -82,7 +82,7 @@
       (append
 	(encode-symbol (car message)
 		       tree)
-	(encode (cdr message tree)))))
+	(encode (cdr message) tree))))
 
 (define (encode-symbol symbol tree)
   (let ((left (left-branch tree))
