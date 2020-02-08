@@ -15,6 +15,9 @@ The version of the book I've been using most is [this HTML5 rendition](https://g
 4. Add the following line to the top of every file you run through Racket so it knows to use the `sicp` package's specification of Scheme instead of defaulting to racket-lang:
     > #lang sicp
 
+## Supporting Code
+The [code for the chapters](https://mitpress.mit.edu/sites/default/files/sicp/code/index.html) which includes supporting code, is very helpful. Sometimes exercises require some extra code to actually execute, and the Complete Code will provide it. I also found exercise 2.77 much more straightforward when being able to see all the code in one place and not be left guessing what previous snippets were implied to be in play.
+
 ## Chapter 2.2.4 (A Picture Language) instructions:
 * Add the following line below `#lang sicp` in your files to include the picture language:
     > (#%require sicp-pict)
