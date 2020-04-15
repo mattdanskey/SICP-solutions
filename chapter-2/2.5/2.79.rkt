@@ -83,6 +83,9 @@
        (lambda (x y) (tag (/ x y))))
   (put 'make 'scheme-number
        (lambda (x) (tag x)))
+  ; ex 2.79
+  (put 'equ? '(scheme-number scheme-number)
+       (lambda (x y) (= x y)))
   'done)
 
 (define (make-scheme-number n)
@@ -210,6 +213,12 @@
        (lambda (x y) (tag (mul-rat x y))))
   (put 'div '(rational rational)
        (lambda (x y) (tag (div-rat x y))))
+  ; ex 2.79
+  (put 'equ? '(rational rational) (lambda (x y)
+    ; since make-rat simplifies all rational numbers, we can do straight comparison
+    ; of numerator and denominator
+    (and (= (numer x) (numer y)) 
+         (= (denom x) (denom y)))))
 
   (put 'make 'rational
        (lambda (n d) (tag (make-rat n d))))
@@ -252,6 +261,11 @@
        (lambda (x y) (tag (make-from-real-imag x y))))
   (put 'make-from-mag-ang 'complex
        (lambda (r a) (tag (make-from-mag-ang r a))))
+  ; ex 2.79
+  ; naive equality that may not be correct for polar / imaginary numbers
+  (put 'equ? '(complex complex)
+       (lambda (x y) (and (= (real-part x) (real-part y))
+                          (= (imag-part x) (imag-part y)))))
 
   ;; EXERCISE 2.77
   ;; to put in complex package
@@ -285,7 +299,40 @@
 ; Exercise 2.79 answer
 ;
 
-(define (equ? num1 num2)
-  (+ num1 num2))
+; Specific implementations have been added to the respective packages.
+; If this question intended for the existing packages not to be modified,
+; the packages would have to expose lower-level abstractions to the system
+; for a non-brittle implementation.
 
 
+(define (equ? x y) (apply-generic 'equ? x y))
+
+
+(display "tests\n")
+;scheme numbers
+(eq? #t
+     (equ? (make-scheme-number 1) (make-scheme-number 1)))
+(eq? #t
+     (equ? (make-scheme-number 1) (make-scheme-number 1.0)))
+(eq? #f
+     (equ? (make-scheme-number 1) (make-scheme-number 2)))
+
+;rational numbers
+(eq? #t
+     (equ? (make-rational 1 2) (make-rational 2 4)))
+(eq? #f
+     (equ? (make-rational 2 3) (make-rational 2 6)))
+
+;complex numbers
+(eq? #t
+     (equ? (make-complex-from-real-imag 2 3)
+           (make-complex-from-real-imag 2 3)))
+(eq? #f
+     (equ? (make-complex-from-real-imag 2 3)
+           (make-complex-from-real-imag 3 4)))
+(eq? #t
+     (equ? (make-complex-from-mag-ang 2 3)
+           (make-complex-from-mag-ang 2 3)))
+(eq? #f
+     (equ? (make-complex-from-mag-ang 2 3)
+           (make-complex-from-mag-ang 3 4)))
